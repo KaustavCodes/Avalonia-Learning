@@ -3,128 +3,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:AvaloniaTestApplication.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="430" d:DesignHeight="900"
              x:Class="AvaloniaTestApplication.Views.MainView"
-             x:DataType="vm:MainViewModel">
+             x:DataType="vm:MainViewModel"
+             Background="#0D1117">
   <Design.DataContext>
-    <!-- This only sets the DataContext for the previewer in an IDE,
-    to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
     <vm:MainViewModel />
   </Design.DataContext>
 
-  <Border Margin="12" Padding="24" CornerRadius="24" Background="#111826">
-    <StackPanel Spacing="20">
-      <StackPanel>
-        <TextBlock Text="Temperature Converter"
-                   FontSize="28"
-                   FontWeight="Bold"
-                   Foreground="#F8FBFF"
-                   HorizontalAlignment="Center"
-                   Margin="0 0 0 8" />
-        <TextBlock Text="Quick temperature conversion in a sleek interface"
-                   FontSize="13"
-                   Foreground="#A3AFE5"
-                   HorizontalAlignment="Center" />
-      </StackPanel>
+  <TransitioningContentControl Content="{Binding CurrentPage}">
+    <TransitioningContentControl.PageTransition>
+      <PageSlide Duration="0:0:0.28" Orientation="Horizontal" />
+    </TransitioningContentControl.PageTransition>
+  </TransitioningContentControl>
 
-      <StackPanel Spacing="16">
-        <StackPanel Spacing="6">
-          <TextBlock Text="Celsius"
-                     FontSize="14"
-                     Foreground="#C8D0FF"
-                     Margin="2 0" />
-          <Border CornerRadius="14" Background="#161F35" Padding="2">
-            <TextBox Name="Celsius"
-                     Text="0"
-                     Watermark="Enter Celsius"
-                     HorizontalAlignment="Stretch"
-                     MinHeight="44"
-                     Background="#111826"
-                     BorderThickness="0"
-                     Foreground="White"
-                     Padding="12" />
-          </Border>
-        </StackPanel>
-
-        <StackPanel Spacing="6">
-          <TextBlock Text="Fahrenheit"
-                     FontSize="14"
-                     Foreground="#C8D0FF"
-                     Margin="2 0" />
-          <Border CornerRadius="14" Background="#161F35" Padding="2">
-            <TextBox Name="Fahrenheit"
-                     Text="0"
-                     Watermark="Enter Fahrenheit"
-                     HorizontalAlignment="Stretch"
-                     MinHeight="44"
-                     Background="#111826"
-                     BorderThickness="0"
-                     Foreground="White"
-                     Padding="12" />
-          </Border>
-        </StackPanel>
-      </StackPanel>
-
-      <Button Click="Button_OnClick"
-              HorizontalAlignment="Stretch"
-              MinHeight="48"
-              FontWeight="Bold"
-              Foreground="White"
-              FontSize="14"
-              HorizontalContentAlignment="Center"
-              VerticalContentAlignment="Center"
-              Content="Calculate">
-
-        <Button.Background>
-          <LinearGradientBrush StartPoint="0%,50%" EndPoint="100%,50%">
-            <GradientStop Color="#2F80ED" Offset="0" />
-            <GradientStop Color="#46C6F2" Offset="0.5" />
-            <GradientStop Color="#6EE7FF" Offset="1" />
-          </LinearGradientBrush>
-        </Button.Background>
-
-        <Button.Styles>
-          <Style Selector="Button:pointerover /template/ ContentPresenter#CustomContentPresenter">
-            <Setter Property="FontSize" Value="20" />
-          </Style>
-
-          <Style Selector="Button:pointerover /template/ Border#MainBorder">
-            <Setter Property="Opacity" Value="0.6" />
-          </Style>
-        </Button.Styles>
-
-        <Button.Template>
-          <ControlTemplate>
-            <Border x:Name="MainBorder"
-                    Background="{TemplateBinding Background}"
-                    CornerRadius="18"
-                    Padding="14 0">
-
-              <Border.Transitions>
-                <Transitions>
-                  <DoubleTransition Property="Opacity" Duration="0:0:0.3"/>
-                </Transitions>
-              </Border.Transitions>
-
-              <ContentPresenter x:Name="CustomContentPresenter"
-                                Content="{TemplateBinding Content}"
-                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}">
-
-                <ContentPresenter.Transitions>
-                  <Transitions>
-                    <DoubleTransition Property="FontSize" Duration="0:0:0.3">
-                      <DoubleTransition.Easing>
-                        <CubicEaseOut />
-                      </DoubleTransition.Easing>
-                    </DoubleTransition>
-                  </Transitions>
-                </ContentPresenter.Transitions>
-              </ContentPresenter>
-            </Border>
-          </ControlTemplate>
-        </Button.Template>
-      </Button>
-    </StackPanel>
-  </Border>
 </UserControl>

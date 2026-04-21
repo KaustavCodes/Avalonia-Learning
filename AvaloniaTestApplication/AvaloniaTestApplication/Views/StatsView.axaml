@@ -1,0 +1,183 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:AvaloniaTestApplication.ViewModels"
+             x:Class="AvaloniaTestApplication.Views.StatsView"
+             x:DataType="vm:StatsViewModel"
+             Background="#0D1117">
+
+  <UserControl.Styles>
+    <Style Selector="Button.back">
+      <Setter Property="Background" Value="#161B22"/>
+      <Setter Property="BorderBrush" Value="#30363D"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="CornerRadius" Value="12"/>
+      <Setter Property="Padding" Value="14,10"/>
+      <Setter Property="Cursor" Value="Hand"/>
+      <Setter Property="Foreground" Value="#C9D1D9"/>
+    </Style>
+    <Style Selector="Button.back:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="#21262D"/>
+    </Style>
+
+    <Style Selector="ProgressBar">
+      <Setter Property="Background" Value="#21262D"/>
+      <Setter Property="Height" Value="8"/>
+      <Setter Property="CornerRadius" Value="4"/>
+      <Setter Property="Minimum" Value="0"/>
+      <Setter Property="Maximum" Value="1"/>
+    </Style>
+  </UserControl.Styles>
+
+  <ScrollViewer VerticalScrollBarVisibility="Hidden"
+                HorizontalScrollBarVisibility="Disabled">
+    <StackPanel MaxWidth="480"
+                Margin="20,28,20,40"
+                Spacing="20"
+                HorizontalAlignment="Center">
+
+      <!-- ── HEADER ── -->
+      <Grid ColumnDefinitions="Auto,*,Auto">
+
+        <!-- Back button -->
+        <Button Grid.Column="0"
+                Classes="back"
+                Command="{Binding GoBackCommand}">
+          <StackPanel Orientation="Horizontal" Spacing="6">
+            <TextBlock Text="←" FontSize="18" VerticalAlignment="Center" />
+            <TextBlock Text="Back" FontSize="14" VerticalAlignment="Center" />
+          </StackPanel>
+        </Button>
+
+        <!-- Title -->
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+          <TextBlock Text="Analytics"
+                     FontSize="22"
+                     FontWeight="Bold"
+                     Foreground="#F0F6FC"
+                     HorizontalAlignment="Center" />
+          <TextBlock Text="Full breakdown"
+                     FontSize="13"
+                     Foreground="#8B949E"
+                     HorizontalAlignment="Center" />
+        </StackPanel>
+
+        <!-- Month badge -->
+        <Border Grid.Column="2"
+                Background="#161B22"
+                BorderBrush="#30363D"
+                BorderThickness="1"
+                CornerRadius="12"
+                Padding="12,8"
+                VerticalAlignment="Center">
+          <TextBlock Text="Apr 2026"
+                     FontSize="12"
+                     Foreground="#8B949E" />
+        </Border>
+      </Grid>
+
+      <!-- ── SUMMARY BANNER ── -->
+      <Border CornerRadius="22" Padding="22,20" ClipToBounds="True">
+        <Border.Background>
+          <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+            <GradientStop Color="#0F172A" Offset="0"/>
+            <GradientStop Color="#1E1B4B" Offset="0.5"/>
+            <GradientStop Color="#0F2040" Offset="1"/>
+          </LinearGradientBrush>
+        </Border.Background>
+        <Grid ColumnDefinitions="*,*,*">
+          <StackPanel Grid.Column="0" HorizontalAlignment="Center" Spacing="4">
+            <TextBlock Text="6" FontSize="26" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" />
+            <TextBlock Text="Metrics" FontSize="11" Foreground="#818CF8" HorizontalAlignment="Center" />
+          </StackPanel>
+          <StackPanel Grid.Column="1" HorizontalAlignment="Center" Spacing="4">
+            <TextBlock Text="↑ avg" FontSize="26" FontWeight="Bold" Foreground="#10B981" HorizontalAlignment="Center" />
+            <TextBlock Text="Trend" FontSize="11" Foreground="#6EE7B7" HorizontalAlignment="Center" />
+          </StackPanel>
+          <StackPanel Grid.Column="2" HorizontalAlignment="Center" Spacing="4">
+            <TextBlock Text="4.8★" FontSize="26" FontWeight="Bold" Foreground="#FCD34D" HorizontalAlignment="Center" />
+            <TextBlock Text="Score" FontSize="11" Foreground="#FDE68A" HorizontalAlignment="Center" />
+          </StackPanel>
+        </Grid>
+      </Border>
+
+      <!-- ── STAT ITEMS ── -->
+      <ItemsControl ItemsSource="{Binding Stats}">
+        <ItemsControl.ItemTemplate>
+          <DataTemplate x:DataType="vm:StatItem">
+            <Border CornerRadius="20"
+                    Padding="20,18"
+                    Margin="0,0,0,12"
+                    Background="#111827">
+              <StackPanel Spacing="14">
+
+                <!-- Icon + Label + Value + Trend -->
+                <Grid ColumnDefinitions="Auto,*,Auto">
+                  <!-- Icon bubble -->
+                  <Border Grid.Column="0"
+                          Width="48" Height="48"
+                          CornerRadius="14"
+                          Background="#1C2333"
+                          Margin="0,0,14,0">
+                    <TextBlock Text="{Binding Icon}"
+                               FontSize="24"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center" />
+                  </Border>
+
+                  <!-- Label + Value -->
+                  <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="2">
+                    <TextBlock Text="{Binding Label}"
+                               FontSize="13"
+                               Foreground="#8B949E" />
+                    <TextBlock Text="{Binding Value}"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               Foreground="#F0F6FC" />
+                  </StackPanel>
+
+                  <!-- Trend badge -->
+                  <Border Grid.Column="2"
+                          Background="#161B22"
+                          CornerRadius="10"
+                          Padding="10,6"
+                          VerticalAlignment="Center">
+                    <TextBlock Text="{Binding Trend}"
+                               FontSize="13"
+                               FontWeight="SemiBold"
+                               Foreground="{Binding TrendColor}" />
+                  </Border>
+                </Grid>
+
+                <!-- Progress track -->
+                <Grid RowDefinitions="Auto,Auto" RowSpacing="6">
+                  <ProgressBar Grid.Row="0"
+                               Value="{Binding Progress}"
+                               Foreground="{Binding BarBrush}" />
+                  <Grid Grid.Row="1" ColumnDefinitions="*,Auto">
+                    <TextBlock Grid.Column="0"
+                               Text="Progress"
+                               FontSize="11"
+                               Foreground="#8B949E" />
+                    <TextBlock Grid.Column="1"
+                               FontSize="11"
+                               FontWeight="SemiBold"
+                               Foreground="{Binding TrendColor}">
+                      <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0:P0}">
+                          <Binding Path="Progress" />
+                        </MultiBinding>
+                      </TextBlock.Text>
+                    </TextBlock>
+                  </Grid>
+                </Grid>
+
+              </StackPanel>
+            </Border>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+
+    </StackPanel>
+  </ScrollViewer>
+
+</UserControl>

@@ -7,6 +7,9 @@
         mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
         x:Class="AvaloniaTestApplication.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="AvaloniaTestApplication">
+        Title="AvaloniaTestApplication"
+        Width="430"
+        Height="900"
+        MinWidth="360">
         <views:MainView />
 </Window>

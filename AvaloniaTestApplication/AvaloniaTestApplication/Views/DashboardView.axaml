@@ -1,0 +1,288 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:AvaloniaTestApplication.ViewModels"
+             x:Class="AvaloniaTestApplication.Views.DashboardView"
+             x:DataType="vm:DashboardViewModel"
+             Background="#0D1117">
+
+  <UserControl.Styles>
+    <!-- Primary gradient button styles -->
+    <Style Selector="Button.primary">
+      <Setter Property="Background">
+        <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
+          <GradientStop Color="#7C3AED" Offset="0"/>
+          <GradientStop Color="#EC4899" Offset="1"/>
+        </LinearGradientBrush>
+      </Setter>
+      <Setter Property="Foreground" Value="White"/>
+      <Setter Property="BorderThickness" Value="0"/>
+      <Setter Property="CornerRadius" Value="16"/>
+      <Setter Property="Height" Value="56"/>
+      <Setter Property="HorizontalAlignment" Value="Stretch"/>
+      <Setter Property="HorizontalContentAlignment" Value="Center"/>
+      <Setter Property="FontSize" Value="17"/>
+      <Setter Property="FontWeight" Value="SemiBold"/>
+      <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+    <Style Selector="Button.primary:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background">
+        <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
+          <GradientStop Color="#6D2ADE" Offset="0"/>
+          <GradientStop Color="#D63589" Offset="1"/>
+        </LinearGradientBrush>
+      </Setter>
+    </Style>
+    <Style Selector="Button.primary:pressed /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background">
+        <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
+          <GradientStop Color="#5B1ABE" Offset="0"/>
+          <GradientStop Color="#B52070" Offset="1"/>
+        </LinearGradientBrush>
+      </Setter>
+    </Style>
+
+    <!-- Secondary button styles -->
+    <Style Selector="Button.secondary">
+      <Setter Property="Background" Value="#161B22"/>
+      <Setter Property="BorderBrush" Value="#30363D"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="CornerRadius" Value="16"/>
+      <Setter Property="Height" Value="56"/>
+      <Setter Property="HorizontalAlignment" Value="Stretch"/>
+      <Setter Property="HorizontalContentAlignment" Value="Center"/>
+      <Setter Property="FontSize" Value="16"/>
+      <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+    <Style Selector="Button.secondary:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="#21262D"/>
+    </Style>
+  </UserControl.Styles>
+
+  <Grid>
+    <!-- Scrollable main content -->
+    <ScrollViewer VerticalScrollBarVisibility="Hidden"
+                  HorizontalScrollBarVisibility="Disabled">
+      <StackPanel MaxWidth="480"
+                  Margin="20,28,20,40"
+                  Spacing="20"
+                  HorizontalAlignment="Center">
+
+        <!-- ── HERO CLOCK CARD ── -->
+        <Border CornerRadius="28"
+                Padding="28,36">
+          <Border.Background>
+            <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+              <GradientStop Color="#13101F" Offset="0"/>
+              <GradientStop Color="#1F1550" Offset="0.45"/>
+              <GradientStop Color="#12213F" Offset="1"/>
+            </LinearGradientBrush>
+          </Border.Background>
+
+          <!-- Inner glow ring decoration -->
+          <Grid>
+            <Ellipse Width="220" Height="220"
+                     HorizontalAlignment="Right"
+                     VerticalAlignment="Top"
+                     Margin="0,-60,-60,0"
+                     Opacity="0.06">
+              <Ellipse.Fill>
+                <RadialGradientBrush>
+                  <GradientStop Color="#7C3AED" Offset="0"/>
+                  <GradientStop Color="Transparent" Offset="1"/>
+                </RadialGradientBrush>
+              </Ellipse.Fill>
+            </Ellipse>
+
+            <StackPanel HorizontalAlignment="Center" Spacing="6">
+              <TextBlock Text="Good Morning! 👋"
+                         FontSize="16"
+                         Foreground="#A5B4FC"
+                         HorizontalAlignment="Center"
+                         LetterSpacing="0.5" />
+              <TextBlock Text="{Binding CurrentTime}"
+                         FontSize="58"
+                         FontWeight="Bold"
+                         Foreground="#FFFFFF"
+                         HorizontalAlignment="Center"
+                         LetterSpacing="3" />
+              <TextBlock Text="{Binding CurrentDate}"
+                         FontSize="15"
+                         Foreground="#818CF8"
+                         HorizontalAlignment="Center" />
+
+              <!-- Live indicator dot -->
+              <StackPanel Orientation="Horizontal"
+                          HorizontalAlignment="Center"
+                          Spacing="6"
+                          Margin="0,8,0,0">
+                <Ellipse Width="8" Height="8" Fill="#10B981" />
+                <TextBlock Text="Live"
+                           FontSize="12"
+                           Foreground="#6EE7B7"
+                           VerticalAlignment="Center" />
+              </StackPanel>
+            </StackPanel>
+          </Grid>
+        </Border>
+
+        <!-- ── SECTION HEADING ── -->
+        <StackPanel Orientation="Horizontal" Spacing="10" Margin="4,0">
+          <TextBlock Text="Overview"
+                     FontSize="20"
+                     FontWeight="SemiBold"
+                     Foreground="#F0F6FC"
+                     VerticalAlignment="Center" />
+          <Border Background="#21262D"
+                  CornerRadius="12"
+                  Padding="10,4">
+            <TextBlock Text="Today"
+                       FontSize="12"
+                       Foreground="#8B949E" />
+          </Border>
+        </StackPanel>
+
+        <!-- ── STATS GRID (2×2) ── -->
+        <UniformGrid Columns="2">
+
+          <!-- Revenue card -->
+          <Border Margin="0,0,8,8" CornerRadius="22" Padding="20,22" ClipToBounds="True">
+            <Border.Background>
+              <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                <GradientStop Color="#1A1040" Offset="0"/>
+                <GradientStop Color="#2D1B69" Offset="1"/>
+              </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+              <Ellipse Width="90" Height="90"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Bottom"
+                       Margin="0,0,-20,-20"
+                       Opacity="0.12">
+                <Ellipse.Fill>
+                  <RadialGradientBrush>
+                    <GradientStop Color="#7C3AED" Offset="0"/>
+                    <GradientStop Color="Transparent" Offset="1"/>
+                  </RadialGradientBrush>
+                </Ellipse.Fill>
+              </Ellipse>
+              <StackPanel Spacing="8">
+                <TextBlock Text="💰" FontSize="28" />
+                <TextBlock Text="{Binding Revenue}"
+                           FontSize="24"
+                           FontWeight="Bold"
+                           Foreground="#FFFFFF" />
+                <TextBlock Text="Revenue"
+                           FontSize="12"
+                           Foreground="#A5B4FC" />
+              </StackPanel>
+            </Grid>
+          </Border>
+
+          <!-- Users card -->
+          <Border Margin="8,0,0,8" CornerRadius="22" Padding="20,22" ClipToBounds="True">
+            <Border.Background>
+              <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                <GradientStop Color="#0C2A2F" Offset="0"/>
+                <GradientStop Color="#0F4A52" Offset="1"/>
+              </LinearGradientBrush>
+            </Border.Background>
+            <StackPanel Spacing="8">
+              <TextBlock Text="👥" FontSize="28" />
+              <TextBlock Text="{Binding Users}"
+                         FontSize="24"
+                         FontWeight="Bold"
+                         Foreground="#FFFFFF" />
+              <TextBlock Text="Active Users"
+                         FontSize="12"
+                         Foreground="#67E8F9" />
+            </StackPanel>
+          </Border>
+
+          <!-- Orders card -->
+          <Border Margin="0,8,8,0" CornerRadius="22" Padding="20,22" ClipToBounds="True">
+            <Border.Background>
+              <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                <GradientStop Color="#2D0A1E" Offset="0"/>
+                <GradientStop Color="#4A1532" Offset="1"/>
+              </LinearGradientBrush>
+            </Border.Background>
+            <StackPanel Spacing="8">
+              <TextBlock Text="📦" FontSize="28" />
+              <TextBlock Text="{Binding Orders}"
+                         FontSize="24"
+                         FontWeight="Bold"
+                         Foreground="#FFFFFF" />
+              <TextBlock Text="Orders"
+                         FontSize="12"
+                         Foreground="#F9A8D4" />
+            </StackPanel>
+          </Border>
+
+          <!-- Growth card -->
+          <Border Margin="8,8,0,0" CornerRadius="22" Padding="20,22" ClipToBounds="True">
+            <Border.Background>
+              <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                <GradientStop Color="#1C1500" Offset="0"/>
+                <GradientStop Color="#332700" Offset="1"/>
+              </LinearGradientBrush>
+            </Border.Background>
+            <StackPanel Spacing="8">
+              <TextBlock Text="📈" FontSize="28" />
+              <TextBlock Text="{Binding Growth}"
+                         FontSize="24"
+                         FontWeight="Bold"
+                         Foreground="#FFFFFF" />
+              <TextBlock Text="Growth Rate"
+                         FontSize="12"
+                         Foreground="#FCD34D" />
+            </StackPanel>
+          </Border>
+
+        </UniformGrid>
+
+        <!-- ── ACTION BUTTONS ── -->
+        <StackPanel Spacing="12" Margin="0,4,0,0">
+
+          <!-- Confetti celebrate button -->
+          <Button Classes="primary"
+                  Command="{Binding CelebrateCommand}">
+            <StackPanel Orientation="Horizontal" Spacing="10">
+              <TextBlock Text="🎉"
+                         FontSize="22"
+                         VerticalAlignment="Center" />
+              <TextBlock Text="Celebrate!"
+                         FontSize="17"
+                         FontWeight="SemiBold"
+                         Foreground="White"
+                         VerticalAlignment="Center" />
+            </StackPanel>
+          </Button>
+
+          <!-- Navigate to full stats -->
+          <Button Classes="secondary"
+                  Command="{Binding GoToStatsCommand}">
+            <StackPanel Orientation="Horizontal" Spacing="10">
+              <TextBlock Text="📊"
+                         FontSize="20"
+                         VerticalAlignment="Center" />
+              <TextBlock Text="View Full Analytics"
+                         FontSize="15"
+                         Foreground="#C9D1D9"
+                         VerticalAlignment="Center" />
+              <TextBlock Text="→"
+                         FontSize="16"
+                         Foreground="#7C3AED"
+                         VerticalAlignment="Center"
+                         Margin="4,0,0,0" />
+            </StackPanel>
+          </Button>
+
+        </StackPanel>
+      </StackPanel>
+    </ScrollViewer>
+
+    <!-- ── CONFETTI CANVAS OVERLAY (non-interactive) ── -->
+    <Canvas x:Name="ConfettiCanvas" IsHitTestVisible="False" />
+  </Grid>
+
+</UserControl>
