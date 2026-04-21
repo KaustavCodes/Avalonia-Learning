@@ -1,0 +1,20 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:AvaloniaTestApplication.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="430" d:DesignHeight="900"
+             x:Class="AvaloniaTestApplication.Views.MainView"
+             x:DataType="vm:MainViewModel"
+             Background="#0D1117">
+  <Design.DataContext>
+    <vm:MainViewModel />
+  </Design.DataContext>
+
+  <TransitioningContentControl Content="{Binding CurrentPage}">
+    <TransitioningContentControl.PageTransition>
+      <PageSlide Duration="0:0:0.28" Orientation="Horizontal" />
+    </TransitioningContentControl.PageTransition>
+  </TransitioningContentControl>
+
+</UserControl>
