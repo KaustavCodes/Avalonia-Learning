@@ -1,0 +1,165 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:AvaloniaTestApplication.ViewModels"
+             x:Class="AvaloniaTestApplication.Views.ProfileView"
+             x:DataType="vm:ProfileViewModel"
+             Background="#0D1117">
+
+    <Design.DataContext>
+        <vm:ProfileViewModel />
+    </Design.DataContext>
+
+    <ScrollViewer VerticalScrollBarVisibility="Hidden"
+                  HorizontalScrollBarVisibility="Disabled">
+        <StackPanel MaxWidth="480"
+                    Margin="20,28,20,40"
+                    Spacing="20"
+                    HorizontalAlignment="Center">
+
+            <!-- ── AVATAR + NAME CARD ── -->
+            <Border CornerRadius="24" Padding="24,32">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                        <GradientStop Color="#13101F" Offset="0"/>
+                        <GradientStop Color="#1F1550" Offset="0.5"/>
+                        <GradientStop Color="#12213F" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+
+                <StackPanel Spacing="16" HorizontalAlignment="Center">
+
+                    <!-- Avatar circle -->
+                    <Border Width="88" Height="88"
+                            CornerRadius="44"
+                            HorizontalAlignment="Center">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                                <GradientStop Color="#7C3AED" Offset="0"/>
+                                <GradientStop Color="#EC4899" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <TextBlock Text="{Binding AvatarInitials}"
+                                   FontSize="30" FontWeight="Bold"
+                                   Foreground="White"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+                    </Border>
+
+                    <!-- Name & role -->
+                    <StackPanel Spacing="6" HorizontalAlignment="Center">
+                        <TextBlock Text="{Binding Name}"
+                                   FontSize="22" FontWeight="Bold"
+                                   Foreground="White"
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding Role}"
+                                   FontSize="14"
+                                   Foreground="#A78BFA"
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding Email}"
+                                   FontSize="13"
+                                   Foreground="#6E7681"
+                                   HorizontalAlignment="Center"/>
+                    </StackPanel>
+
+                    <!-- Join date badge -->
+                    <Border Background="#1C2128" CornerRadius="10" Padding="14,7"
+                            HorizontalAlignment="Center">
+                        <TextBlock Text="{Binding JoinDate}"
+                                   FontSize="12"
+                                   Foreground="#8B949E"/>
+                    </Border>
+                </StackPanel>
+            </Border>
+
+            <!-- ── QUICK STATS ROW ── -->
+            <Grid ColumnDefinitions="*,*,*" Height="90">
+
+                <!-- Projects -->
+                <Border Grid.Column="0" CornerRadius="18" Background="#161B22"
+                        Margin="0,0,8,0">
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="4">
+                        <TextBlock Text="{Binding Projects}"
+                                   FontSize="22" FontWeight="Bold"
+                                   Foreground="#A78BFA"
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock Text="Projects"
+                                   FontSize="12" Foreground="#6E7681"
+                                   HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Commits -->
+                <Border Grid.Column="1" CornerRadius="18" Background="#161B22"
+                        Margin="4,0,4,0">
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="4">
+                        <TextBlock Text="{Binding Commits}"
+                                   FontSize="22" FontWeight="Bold"
+                                   Foreground="#EC4899"
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock Text="Commits"
+                                   FontSize="12" Foreground="#6E7681"
+                                   HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Stars -->
+                <Border Grid.Column="2" CornerRadius="18" Background="#161B22"
+                        Margin="8,0,0,0">
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="4">
+                        <TextBlock Text="{Binding Stars}"
+                                   FontSize="22" FontWeight="Bold"
+                                   Foreground="#F59E0B"
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock Text="Stars"
+                                   FontSize="12" Foreground="#6E7681"
+                                   HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- ── SETTINGS LIST ── -->
+            <Border CornerRadius="18" Background="#161B22" Padding="4">
+                <StackPanel Spacing="0">
+
+                    <!-- Row helper via repetition -->
+                    <Border Padding="18,14" CornerRadius="14,14,0,0">
+                        <Grid ColumnDefinitions="Auto,*,Auto">
+                            <TextBlock Grid.Column="0" Text="🎨" FontSize="18" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="1" Text="Appearance" Margin="14,0,0,0"
+                                       FontSize="15" Foreground="#C9D1D9" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="2" Text="›" FontSize="20" Foreground="#30363D"
+                                       VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Height="1" Background="#21262D" Margin="18,0"/>
+
+                    <Border Padding="18,14">
+                        <Grid ColumnDefinitions="Auto,*,Auto">
+                            <TextBlock Grid.Column="0" Text="🔔" FontSize="18" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="1" Text="Notifications" Margin="14,0,0,0"
+                                       FontSize="15" Foreground="#C9D1D9" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="2" Text="›" FontSize="20" Foreground="#30363D"
+                                       VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Height="1" Background="#21262D" Margin="18,0"/>
+
+                    <Border Padding="18,14" CornerRadius="0,0,14,14">
+                        <Grid ColumnDefinitions="Auto,*,Auto">
+                            <TextBlock Grid.Column="0" Text="🚪" FontSize="18" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="1" Text="Sign Out" Margin="14,0,0,0"
+                                       FontSize="15" Foreground="#F87171" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="2" Text="›" FontSize="20" Foreground="#30363D"
+                                       VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+
+                </StackPanel>
+            </Border>
+
+        </StackPanel>
+    </ScrollViewer>
+
+</UserControl>
